@@ -4,7 +4,7 @@
 	<div class="header">
 		<div class="headertop_desc">
 			<div class="call">
-				<p><span>Need help?</span> call us <span class="number">1-22-3456789</span></span></p>
+				<a href="{{route('home')}}"><button type="button" class="btn btn-danger">TRANG CHỦ</button></a>
 			</div>
 			<div class="account_desc">
 				<ul>
@@ -89,14 +89,6 @@
 
 							</div>
 							<table class="table">
-							<thead>
-								<!-- <tr>
-									<th width="5%">No.</th>
-									<th width="45%">Item</th> 
-									<th width="10%">Quantity</th> 
-									<th width="20%">Unit Price</th> 
-									<th width="20%">Total Price</th> 
-								</tr> -->
 							</thead>
 
 							<tbody>
@@ -110,14 +102,6 @@
 										<span class="pull-left cart-product-option">
 
 											<strong>{{$value->name}}</strong><br />
-											
-
-											<!-- <a href="{{route('delete-cart', $value->rowId)}}">
-												<input type="submit" class="btn btn-red btn-sm" name="" value="Remove Item" id="remove_item_cart">
-											</a> -->
-											<!-- <a href="#">
-												<input type="submit" class="btn btn-red btn-sm update_item_cart" name="" value="Update Item" id="{{$value->rowId}}">
-											</a> -->
 										</span>
 										<div class="clearfix"></div>
 									</td>
@@ -225,14 +209,7 @@
 										<span class="pull-left cart-product-option">
 
 											<strong>{{$value->name}}</strong><br />
-											
 
-											<!-- <a href="{{route('delete-cart', $value->rowId)}}">
-												<input type="submit" class="btn btn-red btn-sm" name="" value="Remove Item" id="remove_item_cart">
-											</a> -->
-											<!-- <a href="#">
-												<input type="submit" class="btn btn-red btn-sm update_item_cart" name="" value="Update Item" id="{{$value->rowId}}">
-											</a> -->
 										</span>
 										<div class="clearfix"></div>
 									</td>

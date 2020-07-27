@@ -4,21 +4,16 @@
 		<div class="header">
 			<div class="headertop_desc">
 				<div class="call">
-					<p><span>Need help?</span> call us <span class="number">1-22-3456789</span></span></p>
+					<a href="{{route('home')}}"><button type="button" class="btn btn-danger">TRANG CHỦ</button></a>
 				</div>
 				<div class="account_desc">
 					<ul>
 						@if(Auth::check())
 							<li><a href="{{route('user', Auth::user()->id)}}">Xin chào {{Auth::user()->fullname}}</a></li>
 							<li><a href="#">Delivery</a></li>
-							<!-- <li><a href="#">Checkout</a></li> -->
-							<!-- <li><a href="#">My Account</a></li> -->
 						@else
 							<li><a href="{{route('register')}}">Đăng ký</a></li>
 							<li><a href="{{route('login')}}">Đăng nhập</a></li>
-							<li><a href="#">Delivery</a></li>
-							<!-- <li><a href="#">Checkout</a></li> -->
-							<!-- <li><a href="#">My Account</a></li> -->
 						@endif
 					</ul>
 				</div>
@@ -64,14 +59,8 @@
 										<span class="pull-left cart-product-option">
 
 											<strong>{{$value->name}}</strong><br />
-											
-
-											
 												<input type="button" class="btn btn-red btn-sm remove_item_cart" name="" value="Remove Item" id="" data-url="{{route('delete-cart', $value->rowId)}}">
-										
-											<!-- <a href="#">
-												<input type="submit" class="btn btn-red btn-sm update_item_cart" name="" value="Update Item" id="{{$value->rowId}}">
-											</a> -->
+
 										</span>
 										<div class="clearfix"></div>
 									</td>

@@ -38,7 +38,7 @@
 	<div class="form-group row">
 		<label for="fullname" class="col-sm-2 form-control-label">Full_Name:</label>
 		<div class="col-sm-8">
-			<input type="text" name="fullname" class="form-control" id="fullname" placeholder="Maniruzzaman" minlength="2" value="{{Auth::user()->username}}" readonly>
+			<input type="text" name="fullname" class="form-control" id="fullname" placeholder="Maniruzzaman" minlength="2"  >
 		</div>
 	</div>
 	<div class="form-group row">
