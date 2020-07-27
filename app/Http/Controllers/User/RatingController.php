@@ -16,13 +16,13 @@ class RatingController extends Controller
     	if($request->ajax())
     	{
 
-    		Ratings::insert([
+    		Ratings::insert([                     // thêm dữ liểu vào bảng RATINGS
     			'product_id'=>$id,
     			'number_rating'=>$request->number,
     		]);
 
     		$product = Products::find($id);
-    		$product->total_number_point += $request->number;
+    		$product->total_number_point += $request->number;     
     		$product->total_rating +=1;
     		$product->save();
            

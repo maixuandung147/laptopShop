@@ -52,7 +52,7 @@ class SuggestController extends Controller
         $suggest->content = $request->content ;
         $suggest->status = 0 ;
         $suggest->save();
-        return redirect()->route('create-suggest')->with('thongbao','Gửi thành công'); 
+        return redirect()->route('create-suggest')->with('thongbao','Cám ơn bạn đã góp ý! Chúng tôi sẽ liên hệ bạn sớm nhất!'); 
     }
 
     /**

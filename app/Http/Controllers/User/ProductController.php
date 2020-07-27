@@ -36,9 +36,9 @@ class ProductController extends Controller
             
         }
     }
-    public function getAllProduct()
+    public function getAllProduct(Request $request)
     {
-        $products = Products::with('product_images')->paginate(8);
+        $products = Products::with('product_images')->where('name', 'LIKE', '%' . $request->search . '%')->paginate(8);
         $categorys = Categoies::with('childrenCategories')->where('parent_id',0)->get();
         return view('user.product.product', compact('products','categorys'));
     }  

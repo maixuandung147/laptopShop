@@ -1,7 +1,7 @@
 <div class="header">
 		<div class="headertop_desc">
 			<div class="call">
-				 <p><span>Need help?</span> call us <span class="number">1-22-3456789</span></span></p>
+				 <a href="{{route('home')}}"><button type="button" class="btn btn-danger">TRANG CHỦ</button></a>
 			</div>
 			<div class="account_desc">
 				<ul>
@@ -34,15 +34,15 @@
 				  	   	<span>
 
 				  	   		<a href=" {{route('cart-index')}}"
-				  	   			title="Bạn đã mua ">Cart:
+				  	   			title="Bạn đã mua {{Cart::count()}}">Cart:
 				  	   		</a>
 				  	   	</span>
 				  	   	<div id="dd" class="wrapper-dropdown-2">
-				  	   		 sản phẩm 
+				  	   		 {{Cart::count()}} sản phẩm 
 
 				  	   		
 				  	   		<ul class="dropdown">
-								<li>Bạn có sản phẩm trong giỏ hàng</li>
+								<li>Bạn có @if(Cart::count()<0) {{no}} @else {{Cart::count()}} @endif sản phẩm trong giỏ hàng</li>
 							</ul>
 						</div>
 					</p>

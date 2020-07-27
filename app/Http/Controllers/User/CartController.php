@@ -19,7 +19,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        $cart = Cart::content();
+        $cart = Cart::content();    //content nó như kiểu danh sách ta dùng foreach 
         return view('user.cart.cart', compact('cart'));
     }
 
@@ -95,26 +95,19 @@ class CartController extends Controller
     public function addCart(Request $request, $id)
     {
         $product = Products::find($id);
-        // dd($product);
         $productImage = Product_Image::where('product_id', $id)->first();
         $promotionPrice = Promotions::where('product_id', $id)->where('end_date', '<', GETDATE())->take(1)->orderBy('created_at', 'ASC')->get();
-
-        // foreach($promotionPrice as $item)
-        // {
-        //     $promotion = $item->price;
-        // }
-              // dd($promotion);
         if($request->promotionPrice > 0)
         {
-            $price = $request->promotionPrice;
+            $price = $request->promotionPrice;  //Đây là thỏa đk mã giảm giá
            
         }
         else{
             $price = $product->price;
         }
         
-        $quantity = (int)$request->quantity;
-        $qty = $product['quantity'] - $quantity;
+        $quantity = (int)$request->quantity;    //chuyền từ chuỗi sang int SỐ
+        $qty = $product['quantity'] - $quantity;    // trừ số lượng trong DATA
         $quantityProducts = $product['quantity'];
 
         if($qty<0 || $qty=0)
@@ -131,12 +124,12 @@ class CartController extends Controller
         
         foreach($cartContent as $value){
             
-            if(($value->qty + $qty) > $quantityProducts){
+            if(($value->qty + $qty) > $quantityProducts){   // nếu số lượng giỏ hàng lơn hơn sản phẩm
                 return redirect()->back()->with('thongbao', 'Sản phẩm không đủ số lượng nha');
             }
         }
 
-        $cart = Cart::add(array('id'=>(int)$id, 'qty' => $qty, 'name'=> $product->name, 'price'=> $price, 'options' => ['img'=>$productImage->path] ));
+        $cart = Cart::add(array('id'=>(int)$id, 'qty' => $qty, 'name'=> $product->name, 'price'=> $price, 'options' => ['img'=>$productImage->path] )); //thêm sản phẩm vào giỏ hàng
 
         return back()->with('message', 'Mua' .$product->name. 'thành công' );
     }
@@ -145,10 +138,6 @@ class CartController extends Controller
     {
         
         Cart::update($request->rowId, $request->qty);
-        // if(Request()->ajax()){
-        //     $rowId = Request::get('rowId');
-        //     $quantity = Request::get('qty');
-        //     Cart::update($request->rowId, $request->qty);
-        // }
+
     }
 }

@@ -15,6 +15,7 @@ use Session;
 use Auth;
 use Mail;
 use App\Mail\ShoppingMail;
+use App\Mail\MailNotify;
 
 
 class CheckoutController extends Controller
@@ -51,7 +52,7 @@ class CheckoutController extends Controller
         // $cart =  Session::get('cart');
         $cart = Cart::content();
         // dd($cart);
-        $order = new Orders();
+        $order = new Orders();  // Add Orders
         $order->user_id = $request->id;
         $order->fullname = $request->fullname;
         $order->username = $request->username;
@@ -63,7 +64,7 @@ class CheckoutController extends Controller
         $order->deliver_status = 0;
         $order->save();
 
-        $order_details = [];
+        $order_details = [];    // tạo 1 mảng để chứa các sản phầm trong giỏ hàng
     
         foreach ($cart as $key => $value) {
            
@@ -76,16 +77,10 @@ class CheckoutController extends Controller
             $product['quantity'] = $product['quantity']-$value->qty;
             $product['sales_volume'] =  $product['sales_volume']+$value->qty;
             $product->save();
-            
-
-            // $order_details[$key] =  $order_detail->save();
-             $order_details[$key] = Order_Detail::create($order_detail);
-            // dd($order_details);
+             $order_details[$key] = Order_Detail::create($order_detail);    //tạo ở data order_detail
         }
 
        
-        // $order_details[$key] = $order_detail->save();
-        // dd($order_details);
         Mail::to($order->email)->send(new ShoppingMail($order, $order_details));
         Session::forget('cart');
         return redirect()->back()->with('success','Đã gửi đơn hàng. Vui lòng kiểm tra mail của bạn!'); 

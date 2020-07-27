@@ -36,7 +36,7 @@
 											@foreach($productImage as $value)
 												@foreach($value->product_images as $key=>$item)
 				                                    <img src="/uploads/{{$item->path}}" alt="" ></img>
-				                                    @endforeach
+			                                    @endforeach
 											@endforeach
 
 										</div>
@@ -67,24 +67,24 @@
 										@if ($promotion != NULL)
 										<p>Promotion Price: 
 											<span>Giảm: </span><span>{{$promotion->price}}%</span><br>
-											<p>Giá cũ: <span style="text-decoration: line-through;">${{number_format($product->price, '2',',')}}</span></p>
+											<p>Giá cũ: <span style="text-decoration: line-through;">${{$product->price}}</span></p>
 											<p>Còn:<span> {{$promotion->products->price - $promotion->price}}$</span></p>
 										</p>
 										@else
-										<p>Price: <span>${{number_format($product->price, '2',',')}}</span></p>
+										<p>Price: <span>${{$product->price}}</span></p>
 										@endif
 									@elseif($product->quantity > 0 && $product->quantity / 2 < $product->sales_volume)
 										@if ($promotion != NULL)
 										<p>Promotion Price: 
 											<span>Giảm: </span><span>{{$promotion->price}}$</span><br>
-											<p>Giá cũ: <span style="text-decoration: line-through;">${{number_format($product->price, '2',',')}}</span></p>
+											<p>Giá cũ: <span style="text-decoration: line-through;">${{$product->price}}</span></p>
 											<p>Còn:<span> {{$promotion->products->price - $promotion->price}}$</span></p>
 											<div class="alert alert-danger">
 												Sản phẩm gần hết!
 											</div>
 										</p>
 										@else
-										<p>Price: <span>${{number_format($product->price, '2',',')}}</span></p>
+										<p>Price: <span>${{$product->price}}</span></p>
 										<div class="alert alert-danger">
 											Sản phẩm gần hết!
 										</div>
@@ -111,7 +111,10 @@
 								</div>
 								
 									@if(Session::has('thongbao'))
-									<div>{{Session::get('thongbao')}}: <strong>Chỉ còn {{$product->quantity}} sản phẩm</strong></div>
+									<div style="color: red">{{Session::get('thongbao')}}: <strong>Chỉ còn {{$product->quantity}} sản phẩm</strong></div>
+									@endif
+									@if(Session::has('message'))
+									<div style="color: blue">{{Session::get('message')}} </div>
 									@endif
 								
 								<button class="button" type="submit" id="btn_add_cart">Thêm vào giỏ hàng</button>	
@@ -145,7 +148,7 @@
 														@if($product->total_rating == 0)
 														<div class=""><span class="fas fa-star" style="font-size:30px; color:#ff9705"> 0 </span></div>
 														@else
-														<div class=""><span class="fas fa-star" style="font-size:30px; color:#ff9705"> {{number_format($product->total_rating / $product->total_number_point, 1, ',', ' ')}} </span></div>
+														<div class=""><span class="fas fa-star" style="font-size:30px; color:#ff9705"> {{number_format(5 * ($product->total_number_point / ($product->total_rating * 5)), 1, ',', ' ')}} </span></div>
 														@endif	
 													</div>
 												</div>
@@ -169,10 +172,12 @@
 														</div>
 													@endfor
 												</div>
-
+											@if(Auth::check())
+											
 												<div class="" style="width:15%; border:1px solid #ff9705; background-color:#ff9705; padding:15px; text-align:center; border-radius:50%">
 													<a class="js_rating_action" style="color:#fff; text-decoration: none; cursor:pointer; opacity:0.7">Đánh giá</a>
 												</div>
+											@endif
 											</div>
 
 											<div class="form_rating hide">
